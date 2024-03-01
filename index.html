@@ -1,5 +1,6 @@
 <script>
     const CHOICES = ["Rock", "Paper", "Scissors"];
+    let result = "";
     // Function which returns either "Rock", "Paper" or "Scissors"
     function getComputerChoice() {
         return CHOICES[Math.floor(Math.random() * 3)];
@@ -8,7 +9,6 @@
     function play(playerSelection, computerSelection) {
         let pSelection = playerSelection.toLowerCase();
         let cSelection = computerSelection.toLowerCase();
-        let result = "";
         
         if (pSelection === cSelection) {
             return result = "Draw!";
@@ -39,5 +39,21 @@
         }
         return result;
     }
-    console.log(play("scissors", getComputerChoice()))
+    // Function to play 5 rounds of rps and announes winner
+    function playGame() {
+        let yourScore = 0;
+        let computerScore = 0;
+
+        for (i = 0; i < 5; i++) {
+            // prompts user for input
+            console.log(play(prompt("Rock Paper or Sciccors!\nTake your pick:"), getComputerChoice()));
+            result.includes("Win") ? yourScore ++ : computerScore++;
+        }
+        if (yourScore > computerScore) {
+            return `You Win! Final Score: ${yourScore}:${computerScore}`;
+        } else {
+            return `You Lose! Final Score: ${computerScore}:${yourScore}`;
+        }
+    }
+    console.log(playGame());
 </script>
