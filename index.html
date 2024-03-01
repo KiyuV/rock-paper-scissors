@@ -47,12 +47,19 @@
         for (i = 0; i < 5; i++) {
             // prompts user for input
             console.log(play(prompt("Rock Paper or Sciccors!\nTake your pick:"), getComputerChoice()));
-            result.includes("Win") ? yourScore ++ : computerScore++;
+            if (result.includes("Win")) {
+                yourScore++;
+            } else if (result.includes("Lose")) {
+                computerScore++;
+            }
         }
+        
         if (yourScore > computerScore) {
             return `You Win! Final Score: ${yourScore}:${computerScore}`;
-        } else {
+        } else if (computerScore > yourScore) {
             return `You Lose! Final Score: ${computerScore}:${yourScore}`;
+        } else {
+            return `Draw! Final Score: ${computerScore}:${yourScore}`;
         }
     }
     console.log(playGame());
