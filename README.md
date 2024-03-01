@@ -1,0 +1,1 @@
+This project involves re-creating rock paper scissors which can be played on the console.

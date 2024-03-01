@@ -1,3 +1,43 @@
 <script>
-    
+    const CHOICES = ["Rock", "Paper", "Scissors"];
+    // Function which returns either "Rock", "Paper" or "Scissors"
+    function getComputerChoice() {
+        return CHOICES[Math.floor(Math.random() * 3)];
+    }
+    //Function which determines the winner of the round
+    function play(playerSelection, computerSelection) {
+        let pSelection = playerSelection.toLowerCase();
+        let cSelection = computerSelection.toLowerCase();
+        let result = "";
+        
+        if (pSelection === cSelection) {
+            return result = "Draw!";
+        }
+
+        switch(pSelection) {
+            case "rock":
+                    if (cSelection === "paper") {
+                        result = "You Lose! Paper beats Rock";
+                    } else {
+                        result = "You Win! Rock beats Scissors"
+                    }
+                break;
+            case "paper":
+                    if (cSelection === "scissors") {
+                        result = "You Lose! Scissors beats Paper";
+                    } else {
+                        result = "You Win! Paper beats Rock"
+                    }
+                break;
+            case "scissors":
+                    if (cSelection === "rock") {
+                        result = "You Lose! Rock beats Scissors";
+                    } else {
+                        result = "You Win! Scissors beats Paper"
+                    }
+                break;
+        }
+        return result;
+    }
+    console.log(play("scissors", getComputerChoice()))
 </script>
