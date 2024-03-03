@@ -8,6 +8,7 @@
         <button>Rock</button>
         <button>Paper</button>
         <button>Scissors</button>
+        <p style="font-size: 1.5em;">You&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;|&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computer</p>
         <div id="results"></div>
         <script>
             const CHOICES = ["Rock", "Paper", "Scissors"];
@@ -54,8 +55,10 @@
                 }
                 // Creating a <p> and setting the text to round result
                 const roundResult = document.createElement('p');
+                
                 roundResult.textContent = result;
                 const div = document.querySelector('#results');
+                
                 div.appendChild(roundResult);
             }
             // Function to play a round of rps and announes winner
@@ -68,6 +71,9 @@
                     ++computerScore;
                 }
 
+                const runningScore = document.querySelector('p');
+                runningScore.innerHTML = `You&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${yourScore}&nbsp;|&nbsp;${computerScore}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computer`;
+
                 if (yourScore === 5 || computerScore === 5) {
                     announceWinner();
                     yourScore = 0;
@@ -78,6 +84,7 @@
 
                     div.appendChild(restart);
                     restart.addEventListener('click', () => {
+                        runningScore.innerHTML = 'You&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;|&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computer';
                         div.innerHTML = '';
                     });
                 }
