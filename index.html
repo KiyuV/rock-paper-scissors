@@ -8,9 +8,12 @@
         <button>Rock</button>
         <button>Paper</button>
         <button>Scissors</button>
+        <div id="results"></div>
         <script>
             const CHOICES = ["Rock", "Paper", "Scissors"];
             let result = "";
+            let yourScore = 0;
+            let computerScore = 0;
             // Function which returns either "Rock", "Paper" or "Scissors"
             function getComputerChoice() {
                 return CHOICES[Math.floor(Math.random() * 3)];
@@ -20,56 +23,75 @@
                 let pSelection = playerSelection.toLowerCase();
                 let cSelection = computerSelection.toLowerCase();
                 
-                if (pSelection === cSelection) {
-                    return result = "Draw!";
-                }
-        
                 switch(pSelection) {
                     case "rock":
                             if (cSelection === "paper") {
                                 result = "You Lose! Paper beats Rock";
+                            } else if (cSelection === "scissors") {
+                                result = "You Win! Rock beats Scissors";
                             } else {
-                                result = "You Win! Rock beats Scissors"
+                                result = "Draw!";
                             }
                         break;
                     case "paper":
                             if (cSelection === "scissors") {
                                 result = "You Lose! Scissors beats Paper";
+                            } else if (cSelection === "rock") {
+                                result = "You Win! Paper beats Rock";
                             } else {
-                                result = "You Win! Paper beats Rock"
+                                result = "Draw!";
                             }
                         break;
                     case "scissors":
                             if (cSelection === "rock") {
                                 result = "You Lose! Rock beats Scissors";
+                            } else if (cSelection === "paper") {
+                                result = "You Win! Scissors beats Paper";
                             } else {
-                                result = "You Win! Scissors beats Paper"
+                                result = "Draw!"
                             }
                         break;
                 }
-                return result;
+                // Creating a <p> and setting the text to round result
+                const roundResult = document.createElement('p');
+                roundResult.textContent = result;
+                const div = document.querySelector('#results');
+                div.appendChild(roundResult);
             }
-            // Function to play 5 rounds of rps and announes winner
+            // Function to play a round of rps and announes winner
             function playGame(playerChoice) {
-                let yourScore = 0;
-                let computerScore = 0;
-                
-                // prompts user for input
-                console.log(play(playerChoice, getComputerChoice()));
+
+                play(playerChoice, getComputerChoice());
                 if (result.includes("Win")) {
-                    yourScore++;
+                    ++yourScore;
                 } else if (result.includes("Lose")) {
-                    computerScore++;
+                    ++computerScore;
                 }
-        
-                
+
+                if (yourScore === 5 || computerScore === 5) {
+                    announceWinner();
+                    yourScore = 0;
+                    computerScore = 0;
+                }
+            }
+
+            function announceWinner() {
+                let winner = "";
                 if (yourScore > computerScore) {
-                    return `You Win! Final Score: ${yourScore}:${computerScore}`;
+                    winner =`You Win! Final Score: ${yourScore}:${computerScore}`;
                 } else if (computerScore > yourScore) {
-                    return `You Lose! Final Score: ${computerScore}:${yourScore}`;
+                    winner = `You Lose! Final Score: ${computerScore}:${yourScore}`;
                 } else {
-                    return `Draw! Final Score: ${computerScore}:${yourScore}`;
+                    winner = `Draw! Final Score: ${computerScore}:${yourScore}`;
                 }
+                // Creating a <p> element and setting the text to the final score.
+                const gameResult = document.createElement('p');
+                gameResult.style.fontWeight = "bold";
+                gameResult.style.fontSize = "1.5em";
+
+                gameResult.textContent = winner;
+                div = document.querySelector('#results');
+                div.appendChild(gameResult);
             }
             
             const playBtns = document.querySelectorAll('button');
