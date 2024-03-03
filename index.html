@@ -72,6 +72,14 @@
                     announceWinner();
                     yourScore = 0;
                     computerScore = 0;
+                    
+                    const restart = document.createElement('button');
+                    restart.textContent = 'Play Again';
+
+                    div.appendChild(restart);
+                    restart.addEventListener('click', () => {
+                        div.innerHTML = '';
+                    });
                 }
             }
 
@@ -101,9 +109,6 @@
                     playGame(btn.textContent);
                 });
             });
-            
-            
-            //console.log(playGame());
         </script>
     </body>
 </html>
